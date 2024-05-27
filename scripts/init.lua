@@ -26,7 +26,7 @@ local function getOption(options, name, defaultVal)
 end
 
 local pilotnames = {
-	--["Pilot_Names"] = "Names",
+	["Pilot_Names"] = "Names",
 }
 
 function mod:metadata()
