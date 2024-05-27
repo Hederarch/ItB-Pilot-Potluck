@@ -49,16 +49,13 @@ end
 local HOOK_nextTurn = function()
   local effect = SkillEffect()
   if Game:GetTeamTurn() == TEAM_PLAYER then
-    LOG("TEAM START TURN")
     for id = 0, 2 do
       if Board:GetPawn(id):IsAbility(pilot.Skill) then
-        LOG(id)
         local space = Board:GetPawn(id):GetSpace()
         for i = DIR_START, DIR_END do
           --Taunt every point, taunt lib will manage the conditionals
           local point = space + DIR_VECTORS[i]
           taunt.addTauntEffectSpace(effect, point, space)
-          LOG(point)
         end
         --damage = SpaceDamage(Board:GetPawn(id):GetSpace(),0)
         --Custom Animation???
