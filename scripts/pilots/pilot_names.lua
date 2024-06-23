@@ -2,10 +2,11 @@ local this = {}
 
 local mod = mod_loader.mods[modApi.currentMod]
 local path = mod.scriptPath
-local taunt = require(path.."taunt/taunt")
---local pawnMove = require(path .."libs/pawnMoveSkill")
---local moveskill = require(path .."libs/pilotSkill_move")
+local pilotSkill_tooltip = mod.libs.pilotSkill_tooltip
 --local repairApi = mod.libs.repairApi
+--local pawnMove = self.libs.pawmMove
+--local moveSkill = self.libs.moveSkill
+local taunt = mod.libs.taunt
 
 local pilot = {
 	Id = "Pilot_Names",
@@ -40,7 +41,7 @@ end
 
 function this:init(mod)
 	CreatePilot(pilot)
-	require(mod.scriptPath .."libs/pilotSkill_tooltip").Add(pilot.Skill, PilotSkill("Alluring Gaze", "Taunts all adjacent enemies at the start of your turn."))
+	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Alluring Gaze", "Taunts all adjacent enemies at the start of your turn."))
 
 	--Skill
 

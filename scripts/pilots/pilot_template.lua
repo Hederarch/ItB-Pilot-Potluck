@@ -2,16 +2,17 @@ local this = {}
 
 local mod = mod_loader.mods[modApi.currentMod]
 local path = mod.scriptPath
---local pawnMove = require(path .."libs/pawnMoveSkill")
---local moveskill = require(path .."libs/pilotSkill_move")
---local taunt = require(path.."taunt/taunt")
+local pilotSkill_tooltip = mod.libs.pilotSkill_tooltip
 --local repairApi = mod.libs.repairApi
+--local pawnMove = self.libs.pawmMove
+--local moveSkill = self.libs.moveSkill
+--local taunt = mod.libs.taunt
 
 local pilot = {
 	Id = "",
 	Personality = "",
 	Name = "",
-	Sex = SEX_MALE, --SEX_FEMALE
+	Sex = SEX_MALE, --or other sex
 	Skill = "",
 	Voice = "/voice/archimedes", --or other voice
 }
@@ -40,9 +41,10 @@ end
 
 function this:init(mod)
 	CreatePilot(pilot)
-	require(mod.scriptPath .."libs/pilotSkill_tooltip").Add(pilot.Skill, PilotSkill("Name", "Description"))
+	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Name", "Description"))
 
-	--Skill
+	--Skill: A lot of the skill will probably just be hooks, which goes down below
+	--But art and icons can go here
 
 end
 
@@ -55,8 +57,13 @@ function this:load(modApiExt, options)
 end
 --]]
 
-local function EVENT_onModsLoaded()
+-- Place hook functions here
+-- Use BoardHasAbility to check if your pilot is on the Board
+-- Or search all mech pawns to find the pawn with your skill
+-- But DON'T apply effects to the board uncondtionally
 
+local function EVENT_onModsLoaded()
+	--Add hooks here
 end
 
 modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)

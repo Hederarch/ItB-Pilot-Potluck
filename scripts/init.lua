@@ -1,4 +1,6 @@
 local descriptiontext = "HEDERA/TODO"
+local pilot_init = "pilots/init"
+
 
 local mod = {
 	id = "PilotPotluck",
@@ -6,27 +8,11 @@ local mod = {
 	version = "0.0.0", --BETA
 	dependencies = {
 		modApiExt = "1.22",
-	--	memedit = "",
+	  memedit = "1.1.5",
 	--	easyEdit = "",
 	},
 	icon = "ItBPP.png",
 	description = descriptiontext,
-}
-
-local function getModOptions(mod)
-    return mod_loader:getModConfig()[mod.id].options
-end
-
-local function getOption(options, name, defaultVal)
-	if options and options[name] then
-		return options[name].enabled
-	end
-	if defaultVal then return defaultVal end
-	return true
-end
-
-local pilotnames = {
-	["Pilot_Names"] = "Names",
 }
 
 function mod:metadata()
@@ -37,37 +23,32 @@ function mod:metadata()
 		{enabled = true}
 	)
 	--]]
-	for id, name in pairs(pilotnames) do
-		modApi:addGenerationOption(
-			"enable_" .. string.lower(id), "Pilot: "..name,
-			"Enable this pilot.",
-			{enabled = true}
-		)
-    end
+
+	require(self.scriptPath..pilot_init):metadata()
 end
 
 function mod:init()
 	self.libs = {}
+
+	self.libs.pilotSkill_tooltip = require(mod.scriptPath .."libs/pilotSkill_tooltip")
+
 	self.libs.repairApi = require(self.scriptPath.. "replaceRepair/api")
 	self.libs.repairApi:init(self, modapiext)
+
+	self.libs.pawmMove = require(self.scriptPath .."libs/pawnMoveSkill")
+	self.libs.skillMove = require(self.scriptPath .."libs/pilotSkill_move")
+	self.libs.taunt = require(self.scriptPath.."taunt/taunt")
 
 	--libs need to be added to folders if used
 	--dialogs = require(self.scriptPath .."libs/dialogs")
 	--require(self.scriptPath.."addTraits")
 
-	modApi:appendAssets("img/portraits/pilots/","img/portraits/pilots/")
-
-	local options = getModOptions(mod)
-	for id, name in pairs(pilotnames) do
-		if getOption(options, "enable_"..string.lower(id)) then
-			self[id] = require(self.scriptPath .. string.lower(id))
-			self[id]:init(self)
-		end
-	end
+	require(self.scriptPath..pilot_init):init()
 end
 
 function mod:load(options,version)
 	self.libs.repairApi:load(self, options, version)
+	--require(self.scriptPath..pilot_init):load()
 	--dialogs.load(modapiext)
 end
 
