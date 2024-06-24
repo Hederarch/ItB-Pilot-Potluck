@@ -4,7 +4,7 @@ local scriptPath = mod.scriptPath
 local pilotPath = scriptPath.."pilots/"
 
 local pilotnames = {
-	["Pilot_Names"] = "Names",
+	["Pilot_Names"] = "________",
 }
 
 local function getModOptions(mod)

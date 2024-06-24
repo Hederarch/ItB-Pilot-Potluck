@@ -11,7 +11,7 @@ local taunt = mod.libs.taunt
 local pilot = {
 	Id = "Pilot_Names",
 	Personality = "Names",
-	Name = "Names",
+	Name = "________",
 	Sex = SEX_MALE, --SEX_FEMALE
 	Skill = "NamesSkill",
 	Voice = "/voice/archimedes", --or other voice
@@ -41,28 +41,24 @@ end
 
 function this:init(mod)
 	CreatePilot(pilot)
-	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Alluring Gaze", "Taunts all adjacent enemies at the start of your turn."))
+	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Alluring Gaze", "Weapons ________ uses taunt adjacent enemies after use."))
 
 	--Skill
 
 end
 
-local HOOK_nextTurn = function()
+local HOOK_skillEnd = function(mission, pawn, weaponId, p1, p2)
   local effect = SkillEffect()
-  if Game:GetTeamTurn() == TEAM_PLAYER then
-    for id = 0, 2 do
-      if Board:GetPawn(id):IsAbility(pilot.Skill) then
-        local space = Board:GetPawn(id):GetSpace()
-        for i = DIR_START, DIR_END do
-          --Taunt every point, taunt lib will manage the conditionals
-          local point = space + DIR_VECTORS[i]
-          taunt.addTauntEffectSpace(effect, point, space)
-        end
-        --damage = SpaceDamage(Board:GetPawn(id):GetSpace(),0)
-        --Custom Animation???
-        --effect:AddDamage(damage)
-      end
+  if pawn:IsAbility(pilot.Skill) and weaponId ~= "Move" then
+    local space = pawn:GetSpace()
+    for i = DIR_START, DIR_END do
+      --Taunt every point, taunt lib will manage the conditionals
+      local point = space + DIR_VECTORS[i]
+      taunt.addTauntEffectSpace(effect, point, space)
     end
+    --damage = SpaceDamage(Board:GetPawn(id):GetSpace(),0)
+    --Custom Animation???
+    --effect:AddDamage(damage)
   end
   Board:AddEffect(effect)
 end
@@ -79,7 +75,7 @@ end
 --]]
 
 local function EVENT_onModsLoaded()
-  modApi:addNextTurnHook(HOOK_nextTurn)
+  modapiext:addSkillEndHook(HOOK_skillEnd)
 end
 
 modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
