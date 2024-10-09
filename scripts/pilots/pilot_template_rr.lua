@@ -7,6 +7,7 @@ local repairApi = mod.libs.repairApi
 --local pawnMove = self.libs.pawmMove
 --local moveSkill = self.libs.moveSkill
 --local taunt = mod.libs.taunt
+--local boardEvents = mod.libs.boardEvents
 
 local pilot = {
 	Id = "",

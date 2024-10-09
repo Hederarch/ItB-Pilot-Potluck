@@ -5,7 +5,7 @@ local pilotPath = scriptPath.."pilots/"
 
 local pilotnames = {
 	["Pilot_Names"] = "________",
-	--["Pilot_Hedera"] = "Hedera",
+	["Pilot_Hedera"] = "Hedera",
   ["Pilot_Djinn"] = "Djinn",
 	["Pilot_Machin"] = "Machin",
 }

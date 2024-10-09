@@ -7,6 +7,7 @@ local pilotSkill_tooltip = mod.libs.pilotSkill_tooltip
 --local pawnMove = self.libs.pawmMove
 --local moveSkill = self.libs.moveSkill
 --local taunt = mod.libs.taunt
+local boardEvents = mod.libs.boardEvents
 
 local pilot = {
 	Id = "Pilot_Hedera",
@@ -49,13 +50,13 @@ local function getUnoccupiedSpaces(count, point, size) -- copied from weapons_ba
 			end
 		end
 	end
-	
+
 	local ret = {}
 	while count > 0 and #choices > 0 do
 		ret[#ret + 1] = random_removal(choices) -- this line is broken in the original, indexes to zero with ret[#ret]
 		count = count - 1
 	end
-	
+
 	return ret
 end
 
@@ -94,7 +95,7 @@ end
 MINE_TYPES = {"Hedera_HealJuice","Hedera_MoveJuice","Hedera_BoostJuice","Hedera_ShieldJuice","Hedera_RefreshJuice"}
 
 TILE_TOOLTIPS = {
-	Hedera_HealJuice = {"Sweet Patch", "Increases max Health by 1 when collected."},	
+	Hedera_HealJuice = {"Sweet Patch", "Increases max Health by 1 when collected."},
 	Hedera_MoveJuice = {"Sour Patch", "Increases movement speed by 1 when collected."},
 	Hedera_BoostJuice = {"Bitter Patch", "Grants Boost when collected."},
 	Hedera_ShieldJuice = {"Umami Patch", "Grants a Shield when collected."},
@@ -111,11 +112,11 @@ Hedera_ShieldJuice = { Image = "combat/hedera_patch_bubble.png", Damage = juice_
 Hedera_RefreshJuice = { Image = "combat/hedera_patch_action.png", Damage = juice_get, Tooltip = "Hedera_RefreshJuice", Icon = "combat/icons/icon_doubleshot_glow.png", UsedImage = ""}
 
 local HOOK_nextTurn = function()
-	GetCurrentMission().Potluck_SpedUpThisTurn = {} 
+	GetCurrentMission().Potluck_SpedUpThisTurn = {}
   local effect = SkillEffect()
   if Game:GetTeamTurn() == TEAM_ENEMY then
     for id = 0, 2 do
-      if Board:GetPawn(id):IsAbility(pilot.Skill) then 
+      if Board:GetPawn(id):IsAbility(pilot.Skill) then
         local space = Board:GetPawn(id):GetSpace() -- do the skill below here
 		math.randomseed(os.time())
         selectedPoints = getUnoccupiedSpaces(math.random(4,8))
@@ -134,7 +135,7 @@ local HOOK_nextTurn = function()
   Board:AddEffect(effect)
 end
 
-BoardEvents.onItemRemoved:subscribe(function(loc, removed_item)
+boardEvents.onItemRemoved:subscribe(function(loc, removed_item)
     if removed_item == "Hedera_HealJuice" then
         local pawn = Board:GetPawn(loc)
         if pawn then

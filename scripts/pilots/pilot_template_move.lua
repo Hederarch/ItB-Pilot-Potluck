@@ -7,6 +7,7 @@ local pilotSkill_tooltip = mod.libs.pilotSkill_tooltip
 local pawnMove = self.libs.pawmMove
 local moveSkill = self.libs.moveSkill
 --local taunt = mod.libs.taunt
+--local boardEvents = mod.libs.boardEvents
 
 local pilot = {
 	Id = "",
