@@ -25,7 +25,7 @@ Replace Repair Skills are much like making a weapon. Use the `pilot_template_rr.
 Move Skills can be created using the `pilot_template_move.lua` file. Much like the replace repair, it's just like creating a weapon skill, except for a move instead. As with the others, fill out the comments given and use other pilots as an example if you're struggling.
 ### Art
 Pilot portraits should go in `img/portraits` and replace repair icons should go in `img/weapons`, but besides that, everything else can got where you best see fit. If you want to request art, either pilot portraits or other vfx, head to the Pilot Potluck thread.
-You don't need to worry about appending your pilot portraits, but any other art needs to be appended in the init portion of your pilot file.
+You don't need to worry about appending your pilot portraits, or replace repair icons but any other art needs to be appended in the init portion of your pilot file.
 ## Creating a PR (Pull Request)
 The best way to add your pilot code is to create a pull request on github for the repo. This will let us review your code and suggest changes before merging it into the main mod. Usually, this involves creating a branch and then submitting the PR, where it will show up on our end. Same with cloning, there's tons of information online, but if you ever need assistance, head to the Pilot Potluck thread.
 You can alternatively send us your pilot file in the thread, but if your file has issues, it'll be harder to deal with on its own then with a PR, and you'll be unable to make easy changes to files outside of your own pilot file.

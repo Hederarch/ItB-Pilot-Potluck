@@ -49,7 +49,7 @@ end
 
 local HOOK_skillEnd = function(mission, pawn, weaponId, p1, p2)
   local effect = SkillEffect()
-  if pawn:IsAbility(pilot.Skill) and weaponId ~= "Move" then
+  if pawn and pawn:IsAbility(pilot.Skill) and weaponId ~= "Move" then
     local space = pawn:GetSpace()
     for i = DIR_START, DIR_END do
       --Taunt every point, taunt lib will manage the conditionals

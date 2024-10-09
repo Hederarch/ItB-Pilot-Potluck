@@ -5,7 +5,8 @@ local pilotPath = scriptPath.."pilots/"
 
 local pilotnames = {
 	["Pilot_Names"] = "________",
-	["Pilot_Hedera"] = "Hedera",
+	--["Pilot_Hedera"] = "Hedera",
+  ["Pilot_Djinn"] = "Djinn"
 }
 
 local function getModOptions(mod)
@@ -23,6 +24,7 @@ end
 
 function this:init()
   modApi:appendAssets("img/portraits/pilots/","img/portraits/pilots/")
+  modApi:appendAssets("img/weapons/","img/weapons/")
 
 	local options = getModOptions(mod)
 	for id, name in pairs(pilotnames) do
