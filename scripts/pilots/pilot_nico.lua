@@ -50,13 +50,13 @@ function getUnoccupiedSpaces(count, point, size)
 			end
 		end
 	end
-	
+
 	local ret = {}
 	while count > 0 and #choices > 0 do
 		ret[#ret] = random_removal(choices)
 		count = count - 1
 	end
-	
+
 	return ret
 end
 
@@ -73,11 +73,11 @@ function this:init(mod)
 	modApi:appendAsset("img/effects/nicobot_dropper.png", mod.resourcePath .."img/effects/nicobot_dropper.png")
 	modApi:appendAsset("img/units/mission/nicobot.png", mod.resourcePath .."img/units/nicobot.png")
 	modApi:appendAsset("img/units/mission/nicobot_a.png", mod.resourcePath .."img/units/nicobot_a.png")
-	
+
 	ANIMS.BaseUnit = Animation:new { Image = "units/player/mech_punch_1.png", PosX = -19, PosY = -4, Loop = true, Time = 0.3 }
-	ANIMS.nicobot = ANIMS.BaseUnit:new{ Image = "units/snowbots/nicobot.png", PosX = -18, PosY = -9 }
-	ANIMS.nicobota = ANIMS.nicobot:new{ Image = "units/snowbots/nicobot_a.png", NumFrames = 4 }
-	
+	ANIMS.nicobot = ANIMS.BaseUnit:new{ Image = "units/mission/nicobot.png", PosX = -18, PosY = -9 }
+	ANIMS.nicobota = ANIMS.nicobot:new{ Image = "units/mission/nicobot_a.png", NumFrames = 4 }
+
 	ANIMS.Radio_Burst = Animation:new{
 		Image = "combat/icons/radio_animate.png",
 		PosX = -16, PosY = -8,
@@ -85,7 +85,7 @@ function this:init(mod)
 		Time = 0.25,
 		Loop = false
 	}
-	
+
 	--Skill
 	--Art and icons can go here
 
@@ -112,7 +112,7 @@ function this:init(mod)
 
 	function NicoRemote_Link:GetTargetArea(point)
 		local ret = PointList()
-	
+
 		local board_size = Board:GetSize()
 		for i = 0, board_size.x - 1 do
 			for j = 0, board_size.y - 1  do
@@ -122,17 +122,17 @@ function this:init(mod)
 				end
 			end
 		end
-	
+
 		return ret
 	end
 
 	function NicoRemote_Link:GetSkillEffect(p1,p2)
 		local ret = SkillEffect()
-		
+
 		local vfx = SpaceDamage(p1,0)
 		vfx.sAnimation = "Radio_Burst"
 		ret:AddDamage(vfx)
-		
+
 		local damage = SpaceDamage(p2, -1)
 		damage.iFire = EFFECT_REMOVE
 		damage.iAcid = EFFECT_REMOVE
@@ -141,8 +141,8 @@ function this:init(mod)
 
 		return ret
 	end
-	
-	
+
+
 	Deploy_NicoBot = Pawn:new{
 	Name = "Nico-Bot",
 	Health = 1,
@@ -156,7 +156,7 @@ function this:init(mod)
 	}
 	AddPawn("Deploy_NicoBot")
 
-	
+
 end
 
 -- Pawns -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -185,7 +185,7 @@ end
 local function DeployNicobot(p1)
 	LOG("DEPLOYING! PHASE 3")
 	local ret = SkillEffect()
-	
+
 	local targets = extract_table(general_DiamondTarget(p1, 3))
 	LOG("DEPLOYING! PHASE 3.5!")
     local i = 1
@@ -200,7 +200,7 @@ local function DeployNicobot(p1)
 	ret:AddDelay(0.4)
 	deploy.sPawn = "Deploy_NicoBot"
 	deploy.sAnimation = "ExploAir2"
-	ret:AddDropper(deploy,"img/effects/nicobot_dropper.png")
+	ret:AddDropper(deploy,"effects/nicobot_dropper.png")
 	LOG("DEPLOYING! PHASE 6")
 	return ret
 end
@@ -223,7 +223,7 @@ end
 local HOOK_onMissionStarted = function(mission)
 	if BoardHasAbility() then
 		LOG("DEPLOYING! PHASE 1")
-		DelayEffect()	
+		DelayEffect()
 	end
 end
 
