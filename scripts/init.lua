@@ -1,11 +1,11 @@
-local descriptiontext = "HEDERA/TODO"
+local descriptiontext = "A commemorative pilot pack celebrating the many modders of Into the Breach"
 local pilot_init = "pilots/init"
 
 
 local mod = {
 	id = "PilotPotluck",
 	name = "Pilot Potluck",
-	version = "0.0.0", --BETA
+	version = "1.0.0",
 	dependencies = {
 		modApiExt = "1.22",
 	  memedit = "1.1.5",
