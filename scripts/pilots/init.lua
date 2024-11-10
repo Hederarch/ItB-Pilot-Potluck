@@ -9,7 +9,8 @@ local pilotnames = {
   	["Pilot_Djinn"] = "Djinn",
 	["Pilot_Machin"] = "Machin",
 	["Pilot_Nico"] = "Nico",
-	["Pilot_Flynn"] = "Flynn"
+	["Pilot_Flynn"] = "Flynn",
+	["Pilot_Tatu"] = "Tatu",
 }
 
 local function getModOptions(mod)
