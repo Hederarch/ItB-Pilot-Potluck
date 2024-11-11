@@ -156,7 +156,7 @@ local pilot_dialog = {
     -- Game States
 	Gamestart = {
 		"Is this the real life? Is this just fantasy?",
-		"Being iside the game is not as fun as playing it.",
+		"Being inside the game is not as fun as playing it.",
 	},
 	FTL_Found = {
 		"There it is, the thing from the other game!",
@@ -248,7 +248,7 @@ local pilot_dialog = {
 	},
 
     Secret_Arriving = {
-		"And alien? It's an Alien!",
+		"An alien? It's an Alien!",
 	},
     Emerge_Detected = {
 		"It's close to miiiiiidnight, and something evil's lurking in the dark",
