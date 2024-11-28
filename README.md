@@ -14,7 +14,7 @@ Much love to the community for making this possible, and we thank you for playin
 
 # For Modders
 Hello, and welcome to the Pilot Potluck! This here will be your guide to adding yourself into *Into the Breach*!
-First things first, if you ever need help, head over to the Into the Breach discord and find the Pilot Potluck thread in #modding-creation. That will be your one-stop shop for help on art, programming, or github. Send a message in there and someone will help you!
+First things first, if you ever need help, head over to the [Into the Breach Discord](https://discord.gg/trrNB6p) and find the Pilot Potluck thread in #modding-creation. That will be your one-stop shop for help on art, programming, or github. Send a message in there and someone will help you!
 ## Cloning
 The first step is to clone this github repo (repository) into your mods folder. If you haven't used github before, there's lots of tutorials online, but we're also happy to help you. I can't write out an entire tutorial on it because there are many different ways to set it up, and how you do it is up to you. You can also just download a copy of the repo, and then submit a PR on the github website when you're done, but that will have some potential issues with versions, so if you can get it cloned, that would be best!
 A github tip: Make sure that you pull as often as possible. This will ensure that you're on the latest version and prevent merge conflicts
