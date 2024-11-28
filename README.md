@@ -3,10 +3,17 @@
 **A community project commemorating the Into the Breach modding server**
 
 # For Players
-TODO WHEN MOD RELEASES
+Welcome to the Pilot Potluck! To install this mod, make sure you have an up to date version of the [ItB Modloader](https://github.com/itb-community/ITB-ModLoader), then simply unzip the Pilot Potluck into Into the Breach's `mods` folder. Make sure all modloader extensions are enabled: `Mod Content > Mod Configuration > Mod Loader Extensions` from the in-game main menu.
+
+![pilot_potluck_neobanner_vol1](https://github.com/user-attachments/assets/aa352f92-2b86-4417-b841-f960d5a2590e)
+
+
+Version 1.0.0 is out now, including **Djinn, Dqflynn, Hedera, Machin, NamesAreHard, Nico(Generic), and Tatu!**
+
+Much love to the community for making this possible, and we thank you for playing!
 
 # For Modders
-Hello, and welcome to the pilot potluck! This here will be your guide to adding yourself into *Into the Breach*!
+Hello, and welcome to the Pilot Potluck! This here will be your guide to adding yourself into *Into the Breach*!
 First things first, if you ever need help, head over to the Into the Breach discord and find the Pilot Potluck thread in #modding-creation. That will be your one-stop shop for help on art, programming, or github. Send a message in there and someone will help you!
 ## Cloning
 The first step is to clone this github repo (repository) into your mods folder. If you haven't used github before, there's lots of tutorials online, but we're also happy to help you. I can't write out an entire tutorial on it because there are many different ways to set it up, and how you do it is up to you. You can also just download a copy of the repo, and then submit a PR on the github website when you're done, but that will have some potential issues with versions, so if you can get it cloned, that would be best!
