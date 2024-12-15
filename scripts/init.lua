@@ -36,10 +36,10 @@ function mod:init()
 	self.libs.repairApi:init(self, modapiext)
 
 	self.libs.pawmMove = require(self.scriptPath .."libs/pawnMoveSkill")
-	self.libs.skillMove = require(self.scriptPath .."libs/pilotSkill_move")
+	self.libs.moveSkill = require(self.scriptPath .."libs/pilotSkill_move")
+
 	self.libs.boardEvents = require(self.scriptPath.."libs/boardEvents")
 	self.libs.taunt = require(self.scriptPath.."taunt/taunt")
-
 
 	--libs need to be added to folders if used
 	--dialogs = require(self.scriptPath .."libs/dialogs")

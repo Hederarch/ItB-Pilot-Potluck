@@ -4,8 +4,8 @@ local mod = mod_loader.mods[modApi.currentMod]
 local path = mod.scriptPath
 local pilotSkill_tooltip = mod.libs.pilotSkill_tooltip
 --local repairApi = mod.libs.repairApi
-local pawnMove = self.libs.pawmMove
-local moveSkill = self.libs.moveSkill
+local pawnMove = mod.libs.pawmMove
+local moveSkill = mod.libs.moveSkill
 --local taunt = mod.libs.taunt
 --local boardEvents = mod.libs.boardEvents
 
@@ -30,7 +30,7 @@ function this:init(mod)
 
 	--Move Skill
 	--The skill name is usally named Move_Skill, where Move is replaced with the pilots name
-	Move_Skill = {}
+	MoveSkill = {}
 	moveskill.AddTargetArea(pilot.Personality, MoveSkill)
 	moveskill.AddSkillEffect(pilot.Personality, MoveSkill)
 

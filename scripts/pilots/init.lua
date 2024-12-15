@@ -6,11 +6,12 @@ local pilotPath = scriptPath.."pilots/"
 local pilotnames = {
 	["Pilot_Names"] = "________",
 	["Pilot_Hedera"] = "Hedera",
-  	["Pilot_Djinn"] = "Djinn",
+  ["Pilot_Djinn"] = "Djinn",
 	["Pilot_Machin"] = "Machin",
 	["Pilot_Nico"] = "Nico",
 	["Pilot_Flynn"] = "Flynn",
 	["Pilot_Tatu"] = "Tatu",
+	["Pilot_Tosx"] = "Tosx",
 }
 
 local function getModOptions(mod)
