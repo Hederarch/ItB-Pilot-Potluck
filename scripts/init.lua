@@ -40,6 +40,8 @@ function mod:init()
 
 	self.libs.boardEvents = require(self.scriptPath.."libs/boardEvents")
 	self.libs.taunt = require(self.scriptPath.."taunt/taunt")
+	
+	self.libs.status = require(self.scriptPath.."libs/status")
 
 	--libs need to be added to folders if used
 	--dialogs = require(self.scriptPath .."libs/dialogs")
