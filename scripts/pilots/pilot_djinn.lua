@@ -41,7 +41,7 @@ end
 
 function this:init(mod)
 	CreatePilot(pilot)
-	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Djinn's Desires", "Provies three useful(?) wishes per game. Use repair to activate it."))
+	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Djinn's Desires", "Provides three useful(?) wishes per game. Use repair to activate it."))
 
 	--Skill
 	--Art and icons can go here
