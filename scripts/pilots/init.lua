@@ -13,6 +13,8 @@ local pilotnames = {
 	["Pilot_Tatu"] = "Tatu",
 	["Pilot_Tosx"] = "Tosx",
 	["Pilot_Metalocif"] = "Metalocif",
+	["Pilot_Lemonymous"] = "Lemonymous",
+	["Pilot_Square"] = "Square",
 }
 
 local function getModOptions(mod)
