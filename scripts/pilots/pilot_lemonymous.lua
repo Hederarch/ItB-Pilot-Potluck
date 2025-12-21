@@ -93,20 +93,58 @@ function this:init(mod)
 	end
 end
 -- Hooks -------------------------------------------------------------------------------------------------------------------------------------------------
-local function LemonGridResistReset(mission, pawn, weaponId, p1, p2)
-	local fx = _G[pawn:GetQueuedWeapon()]:GetSkillEffect(p1, p2)
-	for _, spaceDamage in ipairs(extract_table(fx.q_effect)) do
-		if Board:GetTerrain(spaceDamage.loc) == TERRAIN_BUILDING then 
-			if Game:GetResist() >= 100 and GAME.LemonPreviousGridResist then
-				Game:SetResist(GAME.LemonPreviousGridResist)
-				GAME.LemonPreviousGridResist = nil
-			end
+local function LemonGridResistReset(mission, pawn, weaponId, p1, p2, p3, effectType)
+	if weaponId == "Move" then return end
+	local fx
+	if p3 == nil then
+		fx = _G[weaponId]:GetSkillEffect(p1, p2)
+	else
+		fx = _G[weaponId]:GetFinalEffect(p1, p2, p3)
+	end
+	local flag = false
+	--stuff below works in *most* cases
+	--things like explosives chaining to damage buildings won't trigger
+	--but I don't want to do recursion on every queued skill
+	for _, spaceDamage in ipairs(extract_table(fx[effectType])) do
+		--HANDLE DIRECT DAMAGE TO A VULNERABLE BUILDING
+		if Board:GetTerrain(spaceDamage.loc) == TERRAIN_BUILDING 
+		and not Board:IsShield(spaceDamage.loc) 
+		and not Board:IsFrozen(spaceDamage.loc)  	
+		and spaceDamage.iDamage > 0	then
+			flag = true
+		end
+		--HANDLE PUSHING SOMETHING INTO A VULNERABLE BUILDING
+		if (spaceDamage.iPush == DIR_UP or spaceDamage.iPush == DIR_DOWN or spaceDamage.iPush == DIR_LEFT or spaceDamage.iPush == DIR_RIGHT) and
+		Board:GetPawn(spaceDamage.loc) and not Board:GetPawn(spaceDamage.loc):IsGuarding() and 
+		Board:GetTerrain(spaceDamage.loc + DIR_VECTORS[spaceDamage.iPush]) == TERRAIN_BUILDING 
+		and not Board:IsShield(spaceDamage.loc + DIR_VECTORS[spaceDamage.iPush]) 
+		and not Board:IsFrozen(spaceDamage.loc + DIR_VECTORS[spaceDamage.iPush]) then
+			flag = true
+		end
+		--HANDLE KILLING SOMETHING THAT BLOWS UP
+		if Board:GetPawn(spaceDamage.loc) and Board:IsDeadly(spaceDamage, pawn) and 
+		(_G[Board:GetPawn(spaceDamage.loc):GetType()].Explodes or Board:GetPawn(spaceDamage.loc):GetMutation() == 6 or Board:GetPawn(spaceDamage.loc):GetMutation() == 7) then
+			flag = true
+		end
+		if flag and Game:GetResist() >= 100 and GAME.LemonPreviousGridResist then
+			Game:SetResist(GAME.LemonPreviousGridResist)
+			GAME.LemonPreviousGridResist = nil
+			return
 		end
 	end
 end
 
 local function EVENT_onModsLoaded()
-	Potluck_ModApiExt:addQueuedSkillEndHook(LemonGridResistReset)
+	--by passing an extra argument, I can use it to look at the part of the skill effect that I care about
+	modapiext:addQueuedSkillEndHook(function(mission, pawn, weaponId, p1, p2)
+		LemonGridResistReset(mission, pawn, weaponId, p1, p2, nil, "q_effect")
+	end)
+	modapiext:addSkillEndHook(function(mission, pawn, weaponId, p1, p2)
+		LemonGridResistReset(mission, pawn, weaponId, p1, p2, nil, "effect")
+	end)
+	modapiext:addFinalEffectEndHook(function(mission, pawn, weaponId, p1, p2, p3)
+		LemonGridResistReset(mission, pawn, weaponId, p1, p2, p3, "effect")
+	end)
 end
 
 modApi.events.onModsLoaded:subscribe(EVENT_onModsLoaded)
