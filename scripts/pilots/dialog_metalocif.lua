@@ -8,7 +8,7 @@ return {
 	FTL_Start = {""},
 	Gamestart_PostVictory = {"Every run, we learn more about the Vek... and about each other."},
 	Death_Revived = {"...that was not fun."},
-	Death_Main = {"Another me will pick up my burden.", "This is my retribution for making Vek stronger."},
+	Death_Main = {"Another me will pick up my burden.", "This is my retribution for making Vek stronger.", "The dread of dying, and being dead, flashes afresh to hold and horrify."},
 	Death_Response = {"You fought well. Rest, now.", "His hanging face, like a devil’s sick of sin..."},
 	Death_Response_AI = {"Good bot."},
 	TimeTravel_Win = {"Farewell, friends. I hope to meet another one of you."},
@@ -17,16 +17,16 @@ return {
 	
 	-- UI Barks
 	Upgrade_PowerWeapon = {"Good. I hope the upgrade works as well.",},
-	Upgrade_NoWeapon = {"I know I'm not useless unarmed, but at least give me something."},
+	Upgrade_NoWeapon = {"I know I'm not useless unarmed, but at least give me something.", "When we disarmed they sold us and delivered us bound to our foe..."},
 	Upgrade_PowerGeneric = {"Feels safer.",},
 	
 	-- Mid-Battle
-	MissionStart = {"I mustn't run away... oh, who am I kidding."},
-	Mission_ResetTurn = {"One more time... one more chance..."},
+	MissionStart = {"I mustn't run away... oh, who am I kidding.", "Let's go, team. We've got bugs to smash.", "Let's go, team. We've got a world to save."},
+	Mission_ResetTurn = {"One more time... one more chance...", "So let us try again, for the very first time."},
 	MissionEnd_Dead = {"Good, I needed the XP.", "The only dead Vek is a good Vek... no, that isn't right."},
 	MissionEnd_Retreat = {"They'll be back, and in greater numbers.", "They might adapt to our weapons."},
 
-	MissionFinal_Start = {"Thank god for air conditioned mechs."},
+	MissionFinal_Start = {"Thank god for air conditioned mechs. Wait, doesn't that require power?"},
 	MissionFinal_StartResponse = {"Cool. Cool cool cool. So you're airdropping giant batteries? Have you checked the risks of explosion?"},
 	MissionFinal_FallStart = {"I do not like falling aaaaaaaaaaaaaah."},
 	MissionFinal_FallResponse = {"no no no no no I hate this part."},
@@ -35,7 +35,7 @@ return {
 	MissionFinal_BombResponse = {"Thanks for the bomb. Next time, maybe arm it during the drop? Just a thought."},
 	MissionFinal_CaveStart = {"Fighting giant insects in a volcano next to a nuke. A perfect Sunday."},
 	MissionFinal_BombDestroyed = {"...why doesn't it blow up harder? I should mod that in."},
-	MissionFinal_BombArmed = {"Are we done? Let's breach out of here, the heat is killing me."},
+	MissionFinal_BombArmed = {"Are we done? Let's breach out of here, the heat is killing me.", "At the end of our path a liquescent and nebulous lustre was born."},
 
 	PodIncoming = {"Dibs on the core."},
 	PodResponse = {"I hope there's a friend in there."},
@@ -46,17 +46,17 @@ return {
 	Secret_DeviceUsed = {"Come on down!"},
 	Secret_Arriving = {"Not the standard time pod model, is it? We should reverse engineer it."},
 	Emerge_Detected = {"Through caverns measureless to man, down to a sunless sea."},
-	Emerge_Success = {"Here they come. Let's check out how they work."},
+	Emerge_Success = {"Here they come. Let's check out how they work.", "And from this chasm, with ceaseless turmoil seething..."},
 	Emerge_FailedMech = {"Hah! Maybe I should put on a few pounds."},
 	Emerge_FailedVek = {"Not enough throughput on that. Vek are not great at engineering, are they?"},
 
 	-- Mech State
-	Mech_LowHealth = {"Bruh.", "As good a time as any to repair."},
-	Mech_Webbed = {"So sticky, yet sturdy. Brilliant material. We should use it!"},
+	Mech_LowHealth = {"Bruh.", "As good a time as any to repair.", "Hear the loud alarum bells - Brazen bells! What tale of terror, now, their turbulency tells!", "I must not know fear, for fear is the mind-killer..."},
+	Mech_Webbed = {"So sticky, yet sturdy. Brilliant material. We should use it!", "Reminds me of Worm."},
 	Mech_Shielded = {"So how do these work, exactly?"},
-	Mech_Repaired = {"This is possibly the worst repair job I've ever done, but as long as I'm still alive to get yelled at, it's good enough."},
+	Mech_Repaired = {"Calm down already.", "This is possibly the worst repair job I've ever done, but I'm still alive to get yelled at.", "That we - in spite of being broken, because of being broken - may rise and build anew."},
 	Pilot_Level_Self = {"My strength is in making others weaker... that doesn't sound very nice.", "The strength of Vek will pale before mine now... muahaha..."},
-	Pilot_Level_Obs = {"Very good."},
+	Pilot_Level_Obs = {"Very good.", "I love seeing people learn.", "You're getting the hang of this!"},
 	Mech_ShieldDown = {"Ah, well. Come at me!"},
 
 	-- Damage Done
@@ -96,7 +96,7 @@ return {
 	Mission_Dam_Destroyed = {"Wash the dam Vek away!"},
 	Mission_Satellite_Destroyed = {"What a shame."},
 	Mission_Satellite_Imminent = {"Liftoff is imminent!"},
-	Mission_Satellite_Launch = {"It's safe now."},
+	Mission_Satellite_Launch = {"It's safe now.", "I will touch the sky...", "We have a liftoff."},
 	Mission_Mines_Vek = {"Well, that was a freebie."},
 
 	-- RST
@@ -118,7 +118,7 @@ return {
 	BotKilled_Obs = {"I just don't care about bots. Does that make me specist?"},
 
 	-- Detritus
-	Mission_Disposal_Destroyed = {"Noooo! Disposal Unit!"},
+	Mission_Disposal_Destroyed = {"Noooo! Disposal Unit!", "Damn."},
 	Mission_Disposal_Activated = {"Melt them down! Yay! Again! ...ahem."},
 	Mission_Barrels_Destroyed = {"We need a ranged mech that just throws these everywhere."},
 	Mission_Power_Destroyed = {"We needed that power."},
