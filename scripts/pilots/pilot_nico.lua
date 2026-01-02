@@ -12,7 +12,7 @@ local repairApi = mod.libs.repairApi
 local pilot = {
 	Id = "Pilot_Nico",
 	Personality = "NicoGeneric",
-	Name = "Nico",
+	Name = "Nicolas 'Generic'",
 	Sex = SEX_MALE, --or other sex
 	Skill = "NicoRemote",
 	Voice = "/voice/archimedes", --or other voice
@@ -67,7 +67,10 @@ end
 
 function this:init(mod)
 	CreatePilot(pilot)
-	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Nico's Remote", "Deploy a bot for each mission, and heal an ally when repairing."))
+	local path2 = mod_loader.mods[modApi.currentMod].resourcePath
+	local personalities = require(path2 .."scripts/libs/personality")
+	local dialog = require(path2 .."scripts/pilots/dialog_nico")
+	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Generic Tech", "Deploy a bot for each mission, and heal an ally when repairing."))
 
 	modApi:appendAsset("img/weapons/pilot_nico_repair.png", mod.resourcePath.."img/weapons/pilot_nico_repair.png")
 	modApi:appendAsset("img/effects/nicobot_dropper.png", mod.resourcePath .."img/effects/nicobot_dropper.png")
@@ -144,7 +147,7 @@ function this:init(mod)
 
 
 	Deploy_NicoBot = Pawn:new{
-	Name = "Nico-Bot",
+	Name = "Gen-Bot",
 	Health = 1,
 	Image = "nicobot",
 	MoveSpeed = 4,
@@ -169,6 +172,7 @@ local function GetUser()
 		local mech = Board:GetPawn(i)
 		if mech then
 			if mech:IsAbility(pilot.Skill) then
+				LOG(Board:GetPawn(i))
 				return Board:GetPawn(i)
 			end
 		end
@@ -177,9 +181,9 @@ local function GetUser()
 end
 
 local function PawnKilled(mission, pawn)
-  if pawn:GetType() == "Deploy_NicoBot" then
-    Board:AddAnimation(pawn:GetSpace(),"ExploAir2",ANIM_DELAY)
-  end
+	if pawn:GetType() == "Deploy_NicoBot" then
+		Board:AddAnimation(pawn:GetSpace(),"ExploAir2",ANIM_DELAY)
+	end
 end
 
 local function DeployNicobot(p1)
@@ -200,7 +204,9 @@ local function DeployNicobot(p1)
 	ret:AddDelay(0.4)
 	deploy.sPawn = "Deploy_NicoBot"
 	deploy.sAnimation = "ExploAir2"
-	ret:AddDropper(deploy,"effects/nicobot_dropper.png")
+	local owner = GetUser():GetId()
+	ret:AddArtillery(p1,deploy,"effects/nicobot_dropper.png",FULL_DELAY)
+	ret:AddScript("Board:GetPawn("..deploy.loc:GetString().."):SetOwner("..owner..")")
 	LOG("DEPLOYING! PHASE 6")
 	return ret
 end
@@ -230,6 +236,7 @@ end
 
 local function EVENT_onModsLoaded()
   modApi:addMissionStartHook(function(mission) HOOK_onMissionStarted(mission) end)
+  modApi:addMissionNextPhaseCreatedHook(DelayEffect)
 end
 
 
