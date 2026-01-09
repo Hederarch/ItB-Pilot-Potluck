@@ -40,16 +40,20 @@ function mod:init()
 
 	self.libs.boardEvents = require(self.scriptPath.."libs/boardEvents")
 	self.libs.taunt = require(self.scriptPath.."taunt/taunt")
+	
+	self.libs.status = require(self.scriptPath.."libs/status")
 
 	--libs need to be added to folders if used
 	--dialogs = require(self.scriptPath .."libs/dialogs")
 	--require(self.scriptPath.."addTraits")
 
 	require(self.scriptPath..pilot_init):init()
+	require(self.scriptPath.."banter")
 end
 
 function mod:load(options,version)
 	self.libs.repairApi:load(self, options, version)
+	require(self.scriptPath.."banter"):load()
 	--require(self.scriptPath..pilot_init):load()
 	--dialogs.load(modapiext)
 end

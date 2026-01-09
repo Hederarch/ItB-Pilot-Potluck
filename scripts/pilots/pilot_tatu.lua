@@ -41,7 +41,7 @@ end
 
 function this:init(mod)
 	CreatePilot(pilot)
-	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Armordillo", "Mech can't be pushed and suffers no self-damage"))
+	pilotSkill_tooltip.Add(pilot.Skill, PilotSkill("Armordillo", "Mech can't be pushed and suffers no self-damage."))
 
 	--Skill: A lot of the skill will probably just be hooks, which goes down below
 	--But art and icons can go here
