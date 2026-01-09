@@ -6,12 +6,13 @@ local pilotPath = scriptPath.."pilots/"
 local pilotnames = {
 	["Pilot_Names"] = "________",
 	["Pilot_Hedera"] = "Hedera",
-  ["Pilot_Djinn"] = "Djinn",
+	["Pilot_Djinn"] = "Djinn",
 	["Pilot_Machin"] = "Machin",
 	["Pilot_Nico"] = "Nico",
 	["Pilot_Flynn"] = "Flynn",
 	["Pilot_Tatu"] = "Tatu",
 	["Pilot_Tosx"] = "Tosx",
+	["Pilot_Truelch"] = "Truelch",
 }
 
 local function getModOptions(mod)
@@ -28,8 +29,8 @@ end
 
 
 function this:init()
-  modApi:appendAssets("img/portraits/pilots/","img/portraits/pilots/")
-  modApi:appendAssets("img/weapons/","img/weapons/")
+	modApi:appendAssets("img/portraits/pilots/","img/portraits/pilots/")
+	modApi:appendAssets("img/weapons/","img/weapons/")
 
 	local options = getModOptions(mod)
 	for id, name in pairs(pilotnames) do
@@ -41,12 +42,20 @@ function this:init()
 end
 
 function this:metadata()
-  for id, name in pairs(pilotnames) do
+	for id, name in pairs(pilotnames) do
 		modApi:addGenerationOption(
 			"enable_" .. string.lower(id), "Pilot: "..name,
 			"Enable this pilot.",
 			{enabled = true}
 		)
+	end
+end
+
+function this:load(options, version)
+	for id, name in pairs(pilotnames) do
+		if self[id]["load"] ~= nil then
+			self[id]:load(options, version)
+		end
     end
 end
 
