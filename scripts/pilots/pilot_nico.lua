@@ -29,6 +29,7 @@ end
 Helper function to see if the board currently has this pilots ability
 --]]
 local function BoardHasAbility()
+	if not Board then return end
 	for id = 0, 2 do
 		if Board:GetPawn(id):IsAbility(pilot.Skill) then
 			return true
@@ -172,7 +173,7 @@ local function GetUser()
 		local mech = Board:GetPawn(i)
 		if mech then
 			if mech:IsAbility(pilot.Skill) then
-				LOG(Board:GetPawn(i))
+				--LOG(Board:GetPawn(i))
 				return Board:GetPawn(i)
 			end
 		end
@@ -187,27 +188,27 @@ local function PawnKilled(mission, pawn)
 end
 
 local function DeployNicobot(p1)
-	LOG("DEPLOYING! PHASE 3")
+	--LOG("DEPLOYING! PHASE 3")
 	local ret = SkillEffect()
 
 	local targets = extract_table(general_DiamondTarget(p1, 3))
-	LOG("DEPLOYING! PHASE 3.5!")
+	--LOG("DEPLOYING! PHASE 3.5!")
     local i = 1
         while Board:IsBlocked(targets[i], PATH_GROUND) do
             i = i + 1
         end
     local deploy = SpaceDamage(targets[i],0)
 	--if target == nil then return ret end
-	LOG("DEPLOYING! PHASE 4")
+	--LOG("DEPLOYING! PHASE 4")
     local deploy = SpaceDamage(targets[i],0)
-	LOG("DEPLOYING! PHASE 5")
+	--LOG("DEPLOYING! PHASE 5")
 	ret:AddDelay(0.4)
 	deploy.sPawn = "Deploy_NicoBot"
 	deploy.sAnimation = "ExploAir2"
 	local owner = GetUser():GetId()
 	ret:AddArtillery(p1,deploy,"effects/nicobot_dropper.png",FULL_DELAY)
 	ret:AddScript("Board:GetPawn("..deploy.loc:GetString().."):SetOwner("..owner..")")
-	LOG("DEPLOYING! PHASE 6")
+	--LOG("DEPLOYING! PHASE 6")
 	return ret
 end
 
@@ -220,7 +221,7 @@ modApi:conditionalHook(
 		return false
 	end,
 	function()
-		LOG("DEPLOYING! PHASE 2")
+		--LOG("DEPLOYING! PHASE 2")
 		Board:AddEffect(DeployNicobot(GetUser():GetSpace()))
 	end
 )
@@ -228,7 +229,7 @@ end
 
 local HOOK_onMissionStarted = function(mission)
 	if BoardHasAbility() then
-		LOG("DEPLOYING! PHASE 1")
+		--LOG("DEPLOYING! PHASE 1")
 		DelayEffect()
 	end
 end

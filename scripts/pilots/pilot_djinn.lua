@@ -28,6 +28,7 @@ end
 Helper function to see if the board currently has this pilots ability
 --]]
 local function BoardHasAbility()
+	if not Board then return end
 	for id = 0, 2 do
 		if Board:GetPawn(id):IsAbility(pilot.Skill) then
 			return true

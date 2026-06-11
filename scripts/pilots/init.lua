@@ -54,8 +54,12 @@ end
 
 function this:load(options, version)
 	for id, name in pairs(pilotnames) do
-		if self[id]["load"] ~= nil then
-			self[id]:load(options, version)
+		if self then
+			if self[id] then
+				if self[id]["load"] ~= nil then
+					self[id]:load(options, version)
+				end
+			end
 		end
     end
 end
