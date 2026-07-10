@@ -152,12 +152,13 @@ end
 Helper function to see if the board currently has this pilots ability
 --]]
 local function BoardHasAbility()
-	if not Board then return end
-	for id = 0, 2 do --doesn't work with my Hell Breachers passive. I should remove that passive anyway...
-		if Board:GetPawn(id):IsAbility(pilot.Skill) then
-			return true
-		end
-	end
+    if not Board then return end
+    for id = 0, 2 do--doesn't work with my Hell Breachers passive. I should remove that passive anyway...
+        local mech = Board:GetPawn(id)
+        if mech ~= nil and mech:IsAbility(pilot.Skill) then
+            return true
+        end
+    end
 end
 function this:GetPilot()
 	return pilot

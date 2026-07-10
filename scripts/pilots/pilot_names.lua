@@ -18,22 +18,16 @@ local pilot = {
 }
 
 --[[
-Helper function to see if it's the tip image
---]]
-local function IsTipImage()
-	return Board:GetSize() == Point(6,6)
-end
-
---[[
 Helper function to see if the board currently has this pilots ability
 --]]
 local function BoardHasAbility()
-	if not Board then return end
-	for id = 0, 2 do
-		if Board:GetPawn(id):IsAbility(pilot.Skill) then
-			return true
-		end
-	end
+    if not Board then return end
+    for id = 0, 2 do
+        local mech = Board:GetPawn(id)
+        if mech ~= nil and mech:IsAbility(pilot.Skill) then
+            return true
+        end
+    end
 end
 
 function this:GetPilot()

@@ -56,14 +56,14 @@ pilotSkill_tooltip.Add(
 
 local resetCharge = false
 
-
 local function BoardHasAbility()
-	if not Board then return end
-	for id = 0, 2 do
-		if Board:GetPawn(id):IsAbility(pilot.Skill) then
-			return true
-		end
-	end
+    if not Board then return end
+    for id = 0, 2 do
+        local mech = Board:GetPawn(id)
+        if mech ~= nil and mech:IsAbility(pilot_withered.Skill) then
+            return true
+        end
+    end
 end
 
 local ffrg_onResetTurn = function(mission)
