@@ -80,7 +80,6 @@ function this:init(mod)
 	function MetalocifSkill_Link:GetSkillEffect(p1,p2)
 		local ret = SkillEffect()
 
-		--Remove if fully replacing repair
 		local damage = SpaceDamage(p1, -1)
 		damage.iFire = EFFECT_REMOVE
 		damage.iAcid = EFFECT_REMOVE
@@ -92,15 +91,20 @@ function this:init(mod)
 		if GameData ~= nil and GameData.current["pilot"..Board:GetPawn(p1):GetId()] ~= nil then 
 			weakenAmount = weakenAmount + GameData.current["pilot"..Board:GetPawn(p1):GetId()].level
 		end
+		
+		local shouldTalk = false
 		for i = DIR_START, DIR_END do
 			local curr = p1 + DIR_VECTORS[i]
 			local pawn = Board:GetPawn(curr)
-			if pawn and pawn:GetTeam() == TEAM_ENEMY and pawn:GetWeaponCount() > 0 then
+			
+			if pawn and pawn:GetTeam() == TEAM_ENEMY and pawn:GetWeaponCount() > 0 and ((_G[pawn:GetWeaponBaseType(1)].Damage or 0) > 0 or (_G[pawn:GetWeaponBaseType(1)].OuterDamage or 0) > 0) then
 				local damage = SpaceDamage(curr)
 				damage.iWeaken = weakenAmount
 				ret:AddDamage(damage)
+				shouldTalk = true
 			end
 		end
+		if Board:GetPawn(p1) and shouldTalk then ret:AddVoice("Enfeeble", Board:GetPawn(p1):GetId()) end
 
 		return ret
 	end
