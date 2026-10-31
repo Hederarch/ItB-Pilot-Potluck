@@ -76,7 +76,7 @@ local load = function()
 	-- Personality.NicoGeneric.Convo_Metalocif_Generic2 = { "Testing is going nicely, but I've been busy piloting as of late." }
 	-- Personality.metalocif_personality.Convo_Metalocif_Generic3 = { "Can you do 6 more for me?" }
 	
-	-- The above would work if Nico made his dialog file
+	-- The above would work if Luna made her dialog file
 ------------------------------------
 end
 
