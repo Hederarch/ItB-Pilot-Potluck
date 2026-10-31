@@ -93,7 +93,7 @@ function this:init(mod)
 	end
 end
 -- Hooks -------------------------------------------------------------------------------------------------------------------------------------------------
-local function LemonGridResistReset(mission, pawn, weaponId, p1, p2, p3, effectType)
+local function LemonGridResistCheck(mission, pawn, weaponId, p1, p2, p3, effectType)
 	if weaponId == "Move" then return end
 	local fx
 	if p3 == nil then
@@ -127,23 +127,41 @@ local function LemonGridResistReset(mission, pawn, weaponId, p1, p2, p3, effectT
 			flag = true
 		end
 		if flag and Game:GetResist() >= 100 and GAME.LemonPreviousGridResist then
-			Game:SetResist(GAME.LemonPreviousGridResist)
-			GAME.LemonPreviousGridResist = nil
+			-- Game:SetResist(GAME.LemonPreviousGridResist)
+			-- GAME.LemonPreviousGridResist = nil
+			GAME.LemonUsedGridResist = true
 			return
 		end
 	end
 end
 
+local function LemonGridResistClear()
+	if GAME.LemonUsedGridResist then
+		Game:SetResist(GAME.LemonPreviousGridResist)
+		GAME.LemonPreviousGridResist = nil
+		GAME.LemonUsedGridResist = nil
+	end
+end
+
 local function EVENT_onModsLoaded()
 	--by passing an extra argument, I can use it to look at the part of the skill effect that I care about
+	modapiext:addQueuedSkillStartHook(function(mission, pawn, weaponId, p1, p2)
+		LemonGridResistCheck(mission, pawn, weaponId, p1, p2, nil, "q_effect")
+	end)
+	modapiext:addSkillStartHook(function(mission, pawn, weaponId, p1, p2)
+		LemonGridResistCheck(mission, pawn, weaponId, p1, p2, nil, "effect")
+	end)
+	modapiext:addFinalEffectStartHook(function(mission, pawn, weaponId, p1, p2, p3)
+		LemonGridResistCheck(mission, pawn, weaponId, p1, p2, p3, "effect")
+	end)
 	modapiext:addQueuedSkillEndHook(function(mission, pawn, weaponId, p1, p2)
-		LemonGridResistReset(mission, pawn, weaponId, p1, p2, nil, "q_effect")
+		LemonGridResistClear()
 	end)
 	modapiext:addSkillEndHook(function(mission, pawn, weaponId, p1, p2)
-		LemonGridResistReset(mission, pawn, weaponId, p1, p2, nil, "effect")
+		LemonGridResistClear()
 	end)
 	modapiext:addFinalEffectEndHook(function(mission, pawn, weaponId, p1, p2, p3)
-		LemonGridResistReset(mission, pawn, weaponId, p1, p2, p3, "effect")
+		LemonGridResistClear()
 	end)
 end
 
