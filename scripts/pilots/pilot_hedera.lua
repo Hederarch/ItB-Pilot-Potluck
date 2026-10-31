@@ -13,27 +13,22 @@ local pilot = {
 	Id = "Pilot_Hedera",
 	Personality = "HexAuthor",
 	Name = "Hedera",
-	Sex = SEX_MALE, --or other sex
+	Sex = SEX_AI, --or other sex
 	Skill = "HederaSkill",
 	Voice = "/voice/archimedes", --or other voice
 }
 
 --[[
-Helper function to see if it's the tip image
---]]
-local function IsTipImage()
-	return Board:GetSize() == Point(6,6)
-end
-
---[[
 Helper function to see if the board currently has this pilots ability
 --]]
 local function BoardHasAbility()
-	for id = 0, 2 do
-		if Board:GetPawn(id):IsAbility(pilot.Skill) then
-			return true
-		end
-	end
+    if not Board then return end
+    for id = 0, 2 do
+        local mech = Board:GetPawn(id)
+        if mech ~= nil and mech:IsAbility(pilot.Skill) then
+            return true
+        end
+    end
 end
 
 --[[
@@ -94,13 +89,14 @@ end
 --mines here
 MINE_TYPES = {"Hedera_HealJuice","Hedera_MoveJuice","Hedera_BoostJuice","Hedera_ShieldJuice","Hedera_RefreshJuice"}
 
-TILE_TOOLTIPS = {
-	Hedera_HealJuice = {"Sweet Patch", "Increases max Health by 1 when collected."},
-	Hedera_MoveJuice = {"Sour Patch", "Increases movement speed by 1 when collected."},
-	Hedera_BoostJuice = {"Bitter Patch", "Grants Boost when collected."},
-	Hedera_ShieldJuice = {"Umami Patch", "Grants a Shield when collected."},
-	Hedera_RefreshJuice = {"Salty Patch", "If collected by a Mech, restores its movement."},
-}
+merge_table(TILE_TOOLTIPS, 
+{
+    Hedera_HealJuice = {"Sweet Patch", "Increases max Health by 1 when collected."},
+    Hedera_MoveJuice = {"Sour Patch", "Increases movement speed by 1 when collected."},
+    Hedera_BoostJuice = {"Bitter Patch", "Grants Boost when collected."},
+    Hedera_ShieldJuice = {"Umami Patch", "Grants a Shield when collected."},
+    Hedera_RefreshJuice = {"Salty Patch", "If collected by a Mech, restores its movement."},
+})
 
 local juice_get = SpaceDamage(0)
 juice_get.sSound = "Science_KO_Crack_OnKill" -- REPLACE ME

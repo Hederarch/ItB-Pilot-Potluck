@@ -8,7 +8,7 @@ local mod = {
 	version = "1.0.0",
 	dependencies = {
 		modApiExt = "1.22",
-	  memedit = "1.1.5",
+		memedit = "1.1.5",
 	--	easyEdit = "",
 	},
 	icon = "ItBPP.png",
@@ -43,6 +43,16 @@ function mod:init()
 	
 	self.libs.status = require(self.scriptPath.."libs/status")
 
+	-- FMW ----->
+	--modapi already defined
+	self.FMW_hotkeyConfigTitle = "Mode Selection Hotkey" -- title of hotkey config in mod config
+	self.FMW_hotkeyConfigDesc = "Hotkey used to open and close firing mode selection." -- description of hotkey config in mod config
+
+	--init FMW
+	require(self.scriptPath.."fmw/FMW"):init()
+	self.libs.fmw = require(self.scriptPath.."fmw/api") --test
+	-- <----- FMW
+
 	--libs need to be added to folders if used
 	--dialogs = require(self.scriptPath .."libs/dialogs")
 	--require(self.scriptPath.."addTraits")
@@ -51,11 +61,15 @@ function mod:init()
 	require(self.scriptPath.."banter")
 end
 
-function mod:load(options,version)
+function mod:load(options, version)
 	self.libs.repairApi:load(self, options, version)
 	require(self.scriptPath.."banter"):load()
 	--require(self.scriptPath..pilot_init):load()
+	require(self.scriptPath..pilot_init):load(options, version)
 	--dialogs.load(modapiext)
+
+	--FMW
+	require(self.scriptPath.."fmw/FMW"):load()
 end
 
 return mod

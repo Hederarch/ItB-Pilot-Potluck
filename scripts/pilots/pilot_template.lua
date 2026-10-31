@@ -21,14 +21,15 @@ local pilot = {
 --[[
 Helper function to see if it's the tip image
 --]]
-local function IsTipImage()
+--[[local function IsTipImage()--DEPRECATED CALL Board:IsTipImage() instead, which is a vanilla function as of AE
 	return Board:GetSize() == Point(6,6)
-end
+end]]
 
 --[[
 Helper function to see if the board currently has this pilots ability
 --]]
 local function BoardHasAbility()
+	if not Board then return end
 	for id = 0, 2 do
 		if Board:GetPawn(id):IsAbility(pilot.Skill) then
 			return true
