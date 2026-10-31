@@ -243,7 +243,7 @@ function PilotPersonality:GetPilotDialog(event)
 	end
 	
 	--If I did everything right, this shouldn't trigger at all
-	LOG("No pilot dialog found for "..event.." event in "..self.Label)
+	LOG("No pilot dialog found for "..event.." event")
 	return ""
 end
 

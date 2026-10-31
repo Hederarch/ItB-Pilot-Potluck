@@ -31,27 +31,15 @@ local load = function()
 ------------------------------------
 	--Dialog that triggers when 'main' ends movement next to 'other'.
 	--We check that 'main' has the right personality, 'other' has the right personality, and they are adjacent.
-	modapiext.dialog:addRuledDialog("MoveEnd", { Unique = true, Odds = 10, Dialog(
+	modapiext.dialog:addRuledDialog("Pilot_Story_Conversation", { Unique = true, Odds = 100, 
+		Dialog(
 			{ other = "Convo_metalocif_personality_flynn_personality1" },
 			{ main = "Convo_metalocif_personality_flynn_personality2" },
 			{ other = "Convo_metalocif_personality_flynn_personality3" }
 		),
 		CastRules = {
 			main = SelectedPersonalityRule("metalocif_personality"),
-
-			other = function(pawnId, cast)
-				if not PersonalityRule("flynn_personality")(pawnId, cast) then
-					return false
-				end
-				if not cast.main then
-					return false
-				end
-
-				local p1 = Game:GetPawn(pawnId):GetSpace()
-				local p2 = Game:GetPawn(cast.main):GetSpace()
-
-				return p1:Manhattan(p2) == 1
-			end
+			other = PersonalityRule("flynn_personality"),
 		}
 	})
 	--Banter goes here. Flynn says the first line, then Metalocif, then Flynn.
@@ -59,24 +47,39 @@ local load = function()
 	Personality.metalocif_personality.Convo_metalocif_personality_flynn_personality2 = { "Hisashiburi desu ne~" }
 	Personality.flynn_personality.Convo_metalocif_personality_flynn_personality3 = { "Genki?" }
 ------------------------------------
-	-- modapiext.dialog:addRuledDialog("Pilot_Story_Conversation", 
-	-- { Unique = true, Odds = 10,
-		-- CastRules = {
-			-- main = SelectedPersonalityRule("metalocif_personality"),
-			-- other = PersonalityRule("NicoGeneric")
-		-- },
-		-- {
-			-- { other = "Convo_Metalocif_Generic1" },
-			-- { main = "Convo_Metalocif_Generic2" },
-			-- { other = "Convo_Metalocif_Generic3" },
-		-- }
-	-- })
+	modapiext.dialog:addRuledDialog("Pilot_Story_Conversation", { Unique = true, Odds = 100,
+		Dialog(
+			{ other = "Convo_Metalocif_Generic1" },
+			{ main = "Convo_Metalocif_Generic2" },
+			{ other = "Convo_Metalocif_Generic3" }
+		),
+		CastRules = {
+			main = PersonalityRule("NicoGeneric"),
+			other = PersonalityRule("metalocif_personality"),
+		}
+	})
 		
-	-- Personality.metalocif_personality.Convo_Metalocif_Generic1 = { "Hey, Generic. Do you have the cyborg prototypes I asked you for?" }
-	-- Personality.NicoGeneric.Convo_Metalocif_Generic2 = { "Testing is going nicely, but I've been busy piloting as of late." }
-	-- Personality.metalocif_personality.Convo_Metalocif_Generic3 = { "Can you do 6 more for me?" }
+	Personality.metalocif_personality.Convo_Metalocif_Generic1 = { "Hey, Generic. Do you have the cyborg prototypes I asked you for?" }
+	Personality.NicoGeneric.Convo_Metalocif_Generic2 = { "Testing is going nicely, but I've been busy piloting as of late." }
+	Personality.metalocif_personality.Convo_Metalocif_Generic3 = { "Can you do 6 more for me?" }
+		
+------------------------------------
+	modapiext.dialog:addRuledDialog("Pilot_Story_Conversation", { Unique = true, Odds = 100,
+		Dialog(
+			{ other = "Convo_Flynn_Generic1" },
+			{ main = "Convo_Flynn_Generic2" },
+			{ other = "Convo_Flynn_Generic3" }
+		),
+		CastRules = {
+			main = PersonalityRule("NicoGeneric"),
+			other = PersonalityRule("flynn_personality"),
+		}
+	})
+		
+	Personality.flynn_personality.Convo_Flynn_Generic1 = { "Flynn, I thought we agreed on being lore friendly?" }
+	Personality.NicoGeneric.Convo_Flynn_Generic2 = { "Where's the fun in that, Luna?" }
+	Personality.flynn_personality.Convo_Flynn_Generic3 = { "Generic, call me GENERIC!" }
 	
-	-- The above would work if Luna made her dialog file
 ------------------------------------
 end
 
