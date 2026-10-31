@@ -13,7 +13,7 @@ local pilot = {
 	Id = "Pilot_Hedera",
 	Personality = "HexAuthor",
 	Name = "Hedera",
-	Sex = SEX_MALE, --or other sex
+	Sex = SEX_AI, --or other sex
 	Skill = "HederaSkill",
 	Voice = "/voice/archimedes", --or other voice
 }
@@ -89,13 +89,14 @@ end
 --mines here
 MINE_TYPES = {"Hedera_HealJuice","Hedera_MoveJuice","Hedera_BoostJuice","Hedera_ShieldJuice","Hedera_RefreshJuice"}
 
-TILE_TOOLTIPS = {
-	Hedera_HealJuice = {"Sweet Patch", "Increases max Health by 1 when collected."},
-	Hedera_MoveJuice = {"Sour Patch", "Increases movement speed by 1 when collected."},
-	Hedera_BoostJuice = {"Bitter Patch", "Grants Boost when collected."},
-	Hedera_ShieldJuice = {"Umami Patch", "Grants a Shield when collected."},
-	Hedera_RefreshJuice = {"Salty Patch", "If collected by a Mech, restores its movement."},
-}
+merge_table(TILE_TOOLTIPS, 
+{
+    Hedera_HealJuice = {"Sweet Patch", "Increases max Health by 1 when collected."},
+    Hedera_MoveJuice = {"Sour Patch", "Increases movement speed by 1 when collected."},
+    Hedera_BoostJuice = {"Bitter Patch", "Grants Boost when collected."},
+    Hedera_ShieldJuice = {"Umami Patch", "Grants a Shield when collected."},
+    Hedera_RefreshJuice = {"Salty Patch", "If collected by a Mech, restores its movement."},
+})
 
 local juice_get = SpaceDamage(0)
 juice_get.sSound = "Science_KO_Crack_OnKill" -- REPLACE ME
