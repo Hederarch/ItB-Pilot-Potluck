@@ -96,9 +96,10 @@ function this:init(mod)
 			local curr = p1 + DIR_VECTORS[i]
 			local pawn = Board:GetPawn(curr)
 			if pawn and pawn:GetTeam() == TEAM_ENEMY and pawn:GetWeaponCount() > 0 then
-				ret:AddScript(string.format("Status.ApplyWeaken(%s, %s)", pawn:GetId(), weakenAmount))
+				local damage = SpaceDamage(curr)
+				damage.iWeaken = weakenAmount
+				ret:AddDamage(damage)
 			end
-		
 		end
 
 		return ret
