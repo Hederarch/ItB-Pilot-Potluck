@@ -12,6 +12,9 @@ local pilotnames = {
 	["Pilot_Flynn"] = "Flynn",
 	["Pilot_Tatu"] = "Tatu",
 	["Pilot_Tosx"] = "Tosx",
+	["Pilot_Metalocif"] = "Metalocif",
+	["Pilot_Lemonymous"] = "Lemonymous",
+	["Pilot_Square"] = "Square",
 	["Pilot_Truelch"] = "Truelch",
 	["Pilot_Withered"] = "WitheredPlate",
 }

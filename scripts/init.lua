@@ -40,6 +40,8 @@ function mod:init()
 
 	self.libs.boardEvents = require(self.scriptPath.."libs/boardEvents")
 	self.libs.taunt = require(self.scriptPath.."taunt/taunt")
+	
+	self.libs.status = require(self.scriptPath.."libs/status")
 
 	-- FMW ----->
 	--modapi already defined
@@ -56,10 +58,13 @@ function mod:init()
 	--require(self.scriptPath.."addTraits")
 
 	require(self.scriptPath..pilot_init):init()
+	require(self.scriptPath.."banter")
 end
 
 function mod:load(options, version)
 	self.libs.repairApi:load(self, options, version)
+	require(self.scriptPath.."banter"):load()
+	--require(self.scriptPath..pilot_init):load()
 	require(self.scriptPath..pilot_init):load(options, version)
 	--dialogs.load(modapiext)
 
